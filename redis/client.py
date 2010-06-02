@@ -102,6 +102,8 @@ class Connection(object):
             if e.args and e.args[0] == errno.EAGAIN:
                 raise ConnectionError("Error while reading from socket: %s" % \
                     e.args[1])
+        except AttributeError:
+            raise ConnectionError("Error while reading from socket")
         return ''
 
 def list_or_args(command, keys, args):
